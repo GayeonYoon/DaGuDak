@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<sql id="search">
+		<choose>
+			<when test="searchOption=='all'">
+				WHERE (
+				writer like '%'||#{keyword}||'%'
+				OR content like
+				'%'||#{keyword}||'%'
+				OR title like '%'||#{keyword}||'%'
+				)
+				AND bid = #{bid}
+			</when>
+
+			<otherwise>
+				WHERE ${searchOption} like '%'||#{keyword}||'%'
+				AND bid = #{bid}
+			</otherwise>
+		</choose>
+	</sql>
+
+	<sql id="pagingHeader">
+		SELECT *
+		FROM(
+		SELECT ROWNUM AS rn, A.* FROM(
+
+	</sql>
+	<sql id="pagingFooter">
+		)A
+		)WHERE rn BETWEEN #{start} AND #{end}
+	</sql>
+
+	<select id="listAll" resultType="BoardVO">
+		<include refid="pagingHeader" />
+		SELECT
+		bid,
+		bno,
+		title,
+		content,
+		writer,
+		regdate,
+		viewcnt,
+		(SELECT count(*)
+		FROM COMMENTS
+		WHERE b.bid = bid
+		AND b.bno = bno) as cmtcount
+		FROM
+		board b
+		<include refid="search" />
+		ORDER BY
+		bno desc,
+		regdate desc
+		<include refid="pagingFooter" />
+	</select>
+
+	<select id="countArticle" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		board
+		<include refid="search"></include>
+	</select>
+
+
+	<insert id="insert">
+		INSERT INTO
+		board(bid,bno,reply,title,content,writer,password,file_name,file_rename,file_size)
+		VALUES(#{bid},(SELECT
+		NVL(MAX(bno)+1,1)
+		FROM board where bid = #{bid}),#{reply},#{title},#{content},#{writer},#{password},#{file_name},#{file_rename},#{file_size})
+	</insert>
+
+	<select id="view" resultType="BoardVO">
+		SELECT * FROM board
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+	</select>
+
+	<update id="increaseViewcnt">
+		UPDATE board SET viewcnt = viewcnt + 1
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+	</update>
+
+	<update id="updateArticle">
+		UPDATE board SET
+		title = #{title},
+		content = #{content}
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+		AND password = #{password}
+	</update>
+	
+	<update id="updateArticleWithFile">
+		UPDATE board SET
+		title = #{title},
+		content = #{content},
+		file_name = #{file_name},
+		file_rename = #{file_rename},
+		file_size = #{file_size}
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+		AND password = #{password}
+	</update>
+
+	<delete id="deleteArticle">
+		DELETE FROM board
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+		AND password = #{password}
+	</delete>
+	
+</mapper>

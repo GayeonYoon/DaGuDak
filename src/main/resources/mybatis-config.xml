@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="BoardVO" type="kr.co.DaGuDak.model.BoardVO" />
+		<typeAlias alias="MemberVO" type="kr.co.DaGuDak.model.MemberVO" />
+		<typeAlias alias="CommentVO" type="kr.co.DaGuDak.model.CommentVO" />
+		<typeAlias alias ="HorseVO" type = "kr.co.DaGuDak.model.HorseVO" />
+		<typeAlias alias ="RaceVO" type = "kr.co.DaGuDak.model.RaceVO"/>
+		<typeAlias alias ="RaceResultVO" type = "kr.co.DaGuDak.model.RaceResultVO"/>
+		<typeAlias alias ="RaceBetVO" type = "kr.co.DaGuDak.model.RaceBetVO"/>
+		<typeAlias alias = "BettingListVO" type = "kr.co.DaGuDak.model.BettingListVO"></typeAlias>
+		
+	</typeAliases>
+
+</configuration>

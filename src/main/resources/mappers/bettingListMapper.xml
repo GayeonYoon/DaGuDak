@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bettingList">
+
+	<sql id="search">
+		<choose>
+			<when test="searchOption=='all'">
+				WHERE (
+				selected_horse like '%'||#{keyword}||'%'
+				OR (select horse_name from
+				horse h where b.selected_horse = h.horse_no) like
+				'%'||#{keyword}||'%'
+				OR member_id like '%'||#{keyword}||'%')
+				AND
+				race_no = #{race_no}
+			</when>
+			<otherwise>
+				WHERE ${searchOption} like '%'||#{keyword}||'%'
+				AND race_no
+				= #{race_no}
+			</otherwise>
+		</choose>
+	</sql>
+
+	<sql id="pagingHeader">
+		SELECT *
+		FROM(
+		SELECT ROWNUM AS rn, A.* FROM(
+
+	</sql>
+	<sql id="pagingFooter">
+		)A
+		)WHERE rn BETWEEN #{start} AND #{end}
+	</sql>
+
+	<insert id="insert">
+		insert into
+		betting_list(race_no,
+		member_id,
+		betting_point,
+		selected_horse
+		)
+		values (
+		#{race_no},
+		#{member_id},
+		#{betting_point},
+		#{selected_horse}
+		)
+
+	</insert>
+
+	<select id="totalBettingPoint" resultType="int">
+		SELECT SUM(BETTING_POINT) AS totalBettingPoint
+		FROM betting_list
+		WHERE RACE_NO = #{race_No}
+	</select>
+
+	<select id="horseTotalBettingPoint" resultType="int">
+		SELECT SUM(BETTING_POINT) AS horseTotalBettingPoint
+		FROM betting_list
+		WHERE RACE_NO = #{race_No}
+		AND SELECTED_HORSE = #{horseNo}
+		GROUP BY SELECTED_HORSE
+
+	</select>
+
+	<select id="bettingIdList" resultType="BettingListVO">
+		select * from betting_list
+		where race_no = #{race_No} and selected_horse = #{horseNo}
+
+	</select>
+
+<select id="listAll" resultType="BettingListVO">
+		<include refid="pagingHeader" />
+		SELECT
+		b.race_no, b.member_id, b.betting_point, b.selected_horse,
+		(select horse_name from horse h where b.selected_horse = h.horse_no) as
+		horse_name
+		FROM
+		BETTING_LIST b
+		<include refid="search" />
+		<include refid="pagingFooter" />
+	</select>
+
+
+	<select id="countBettingHistory" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		betting_list b
+		<include refid="search"/>
+	</select>
+
+</mapper>

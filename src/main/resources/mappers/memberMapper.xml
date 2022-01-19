@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<insert id="insert">
+		insert into member(member_id,
+		password,
+		name,
+		birth,
+		email,
+		phone
+		)
+		values ( #{member_id},
+		#{password},
+		#{name},
+		#{birth},
+		#{email},
+		#{phone}
+		)
+	</insert>
+
+	<!-- ID 중복체크 // 아이디가 있으면 COUNT가 1 없으면 0이 조회 -->
+	<select id="idChk" resultType="int" parameterType="String">
+		SELECT
+		count(*)
+		FROM member
+		WHERE member_id = #{member_id}
+	</select>
+
+	<!-- 로그인 -->
+
+	<select id="viewMember" resultType="MemberVO">
+		SELECT member_id, name, email
+		FROM member
+		WHERE member_id = #{member_id}
+		and password = #{password}
+	</select>
+
+
+	<select id="loginCheck" resultType="String">
+		select name
+		from member
+		where
+		member_id = #{member_id}
+		and password = #{password}
+	</select>
+
+
+	<update id="updateMember">
+		UPDATE member 
+		SET password = #{password},
+			email = #{email},
+			phone = #{phone}
+		WHERE member_id = #{member_id}
+	</update>
+
+	<delete id="deleteMember">
+		DELETE FROM member
+		WHERE member_id = #{member_id}
+	</delete>
+
+	<select id="userInfo" resultType="MemberVO">
+		SELECT member_id, name,birth,email,phone,
+		 decode(total_games,0,0,((win_count / (total_games)) * 100)) as win_rate,
+		point
+		FROM MEMBER
+		WHERE member_id = #{member_id}
+	</select>
+
+	<select id="passwordChk" resultType="int">
+		select count(*)
+		FROM member
+		WHERE member_id = #{member_id}
+		and password = #{password}
+	</select>
+
+	<update id="chargePoint">
+		UPDATE member
+		SET point = #{point}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<update id ="updateWin">
+	UPDATE member
+	SET win_count =  1 + (select win_count from member where member_id = #{member_id})
+	where member_id = #{member_id}
+	</update>
+	
+	<update id = "updateGames">
+	UPDATE member
+	SET TOTAL_GAMES = 1+ (select total_games from member where member_id = #{member_id})
+	WHERE member_id = #{member_id}
+	</update>
+
+
+</mapper>

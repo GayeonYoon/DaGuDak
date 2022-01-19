@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="race">
+
+<select id = "isNewGame" resultType = "int">
+select count(*) from race where isEnd= 'N' or isEnd='ING' or isEnd='SOON'
+</select>
+
+	<insert id="insertRace" parameterType="RaceVO">
+		insert into race(race_no,race_date,first_horse,second_horse,third_horse,fourth_horse,fifth_horse)
+		values ((SELECT
+		NVL(MAX(race_No)+1,1)
+		FROM race),#{race_Date},#{first_Horse},#{second_Horse},#{third_Horse},#{fourth_Horse},#{fifth_Horse})
+	</insert>
+
+	<insert id="createRaceNew" parameterType="RaceVO">
+		insert into race(race_no,race_date,first_horse,second_horse,third_horse,fourth_horse,fifth_horse,isEnd)
+		values ((SELECT
+		NVL(MAX(race_No)+1,1)
+		FROM race),#{race_Date},#{first_Horse},#{second_Horse},#{third_Horse},#{fourth_Horse},#{fifth_Horse},#{isEnd})
+	</insert>
+
+	<select id="raceList" resultType="RaceVO">
+		SELECT * FROM race
+	</select>
+
+	<select id="raceResult" resultType="RaceResultVO">
+		select r.race_No, r.race_Date,
+		(select h.horse_name from horse h where r.FIRST_PLACE = h.horse_no) as "first_Horse_Name",
+		(select h.horse_name from horse h where r.SECOND_PLACE = h.horse_no) as "second_Horse_Name",
+		(select h.horse_name from horse h where r.THIRD_PLACE = h.horse_no) as "third_Horse_Name",
+		r.first_Place, r.second_Place, r.third_Place
+		from race r
+		where r.race_no = #{race_No}
+	</select>
+	
+	<select id="selectedRaceList" resultType="RaceVO">
+      SELECT * 
+      FROM race
+      WHERE race_no = #{race_no}
+   </select>
+
+ <update id="updateRaceResult">
+        UPDATE race
+     SET 
+        isEnd = #{isEnd},
+        first_Place = #{first_Place},
+        second_Place = #{second_Place},
+        third_Place = #{third_Place}
+     WHERE race_no = #{race_No}
+   </update>
+   
+   <select id = "fastestGameSearchToING" resultType="int">
+	SELECT MIN(race_no)
+   FROM race
+   WHERE isend = 'ING'
+   </select>
+   
+   <select id = "fastestGameSearchToSoon" resultType = "int">
+   SELECT MIN(race_no)
+   FROM race
+   WHERE isend = 'SOON'
+   </select>
+   
+    <select id = "fastestGameSearchToN" resultType = "int">
+   SELECT MIN(race_no)
+   From race
+   WHERE isend = 'N'
+   </select>
+   
+   <update id = "raceStateNToSoon">
+   	UPDATE race
+   	SET isEnd = 'SOON'
+   	WHERE race_no = #{race_no}
+   </update>
+   
+   <update id = "updateRaceStateSoonToIng">
+  	UPDATE race
+   	SET isEnd = 'ING'
+   	WHERE race_no = #{race_no}
+   </update>
+   
+   <select id ="whatState" resultType ="String">
+   select isend
+   from race
+   where race_no = #{race_no}
+   </select>
+   
+   <update id = "updateRaceNextGame">
+UPDATE race
+   	SET isEnd = 'SOON'
+   	WHERE race_no = (select MIN(race_no)   FROM race
+   WHERE isend = 'N' )
+   </update>
+
+ 
+</mapper>

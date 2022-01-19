@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="horse">
+
+	<select id="horseList" resultType="HorseVO">
+		SELECT horse_no, horse_name,kind,age,weight,gender,speed , decode(total_games,0,0,((win_count / (total_games)) * 100)) as win_rate
+		FROM HORSE
+		ORDER BY HORSE_NO
+	</select>
+	
+	 <select id="readHorse" resultType="HorseVO">
+   SELECT horse_no, horse_name,kind,age,weight,gender,speed , win_count,total_games, decode(total_games,0,0,((win_count / (total_games)) * 100)) as win_rate
+   FROM HORSE
+   WHERE HORSE_NO = #{HORSE_NO}
+   </select>
+	
+	<insert id="insertHorse">
+      INSERT INTO horse (horse_no, horse_name, kind, age, weight, gender, speed)
+      VALUES (
+             (SELECT
+               NVL(MAX(horse_no)+1,1) as horse_no
+               FROM horse),
+             #{horse_name},
+             #{kind},
+             #{age},
+             #{weight},
+             #{gender},
+             #{speed}
+            )
+   </insert>
+   
+  
+   
+   <update id="updateHorse">
+      UPDATE horse
+      SET 
+         horse_name = #{horse_name},
+         kind = #{kind},
+         age = #{age},
+         weight = #{weight},
+         gender = #{gender},
+         speed = #{speed}
+      WHERE
+         horse_no = #{horse_no}
+   </update>
+   
+   <delete id="deleteHorse">
+   DELETE FROM HORSE WHERE HORSE_NO = #{HORSE_NO}
+   </delete>
+   
+   	
+	<update id ="updateWin">
+	UPDATE horse
+	SET win_count =  1 + (select win_count from horse where horse_no = #{horse_no})
+	where horse_no = #{horse_no}
+	</update>
+	
+	<update id = "updateGames">
+	UPDATE horse
+	SET TOTAL_GAMES = 1+ (select total_games from horse where horse_no = #{horse_no})
+	WHERE horse_no = #{horse_no}
+	</update>
+	
+</mapper>

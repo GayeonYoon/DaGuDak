@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bet">
+
+<select id="selectedRaceList" resultType="RaceBetVO">
+
+select r.race_No, r.race_Date,
+		(select h.horse_name from horse h where r.FIRST_HORSE = h.horse_no) as "first_Horse_Name",
+		(select h.horse_name from horse h where r.SECOND_HORSE = h.horse_no) as "second_Horse_Name",
+		(select h.horse_name from horse h where r.THIRD_HORSE = h.horse_no) as "third_Horse_Name",
+		(select h.horse_name from horse h where r.FOURTH_HORSE = h.horse_no) as "fourth_Horse_Name",
+		(select h.horse_name from horse h where r.FIFTH_HORSE = h.horse_no) as "fifth_Horse_Name",
+		r.first_Horse, r.second_Horse, r.third_Horse, r.fourth_Horse, r.fifth_Horse,
+    (select h.speed from horse h where r.FIRST_HORSE = h.horse_no) as "first_Horse_Speed",
+    (select h.speed from horse h where r.second_HORSE = h.horse_no) as "second_Horse_Speed",
+    (select h.speed from horse h where r.third_HORSE = h.horse_no) as "third_Horse_Speed",
+    (select h.speed from horse h where r.fourth_HORSE = h.horse_no) as "fourth_Horse_Speed",
+    (select h.speed from horse h where r.FIFTH_HORSE = h.horse_no) as "fifth_Horse_Speed", 
+  decode((select h.total_games from horse h where r.FIRST_HORSE = h.horse_no), 0,0,((select h.win_count from horse h where r.FIRST_HORSE = h.horse_no)/(select h.total_games from horse h where r.FIRST_HORSE = h.horse_no)))*100 as "first_Horse_WinRate",
+  decode( (select h.total_games from horse h where r.second_HORSE = h.horse_no),0,0,((select h.win_count from horse h where r.second_HORSE = h.horse_no) / (select h.total_games from horse h where r.second_HORSE = h.horse_no))) *100 as "second_Horse_WinRate",
+   decode((select h.total_games from horse h where r.third_HORSE = h.horse_no),0,0,((select h.win_count from horse h where r.third_HORSE = h.horse_no)/(select h.total_games from horse h where r.third_HORSE = h.horse_no))) *100 as "third_Horse_WinRate",
+   decode( (select h.total_games from horse h where r.fourth_HORSE = h.horse_no), 0,0,((select h.win_count from horse h where r.fourth_HORSE = h.horse_no)/(select h.total_games from horse h where r.fourth_HORSE = h.horse_no))) * 100 as "fourth_Horse_WinRate",
+    decode((select h.total_games from horse h where r.FIFTH_HORSE = h.horse_no),0,0,((select h.win_count from horse h where r.FIFTH_HORSE = h.horse_no)/(select h.total_games from horse h where r.FIFTH_HORSE = h.horse_no))) *100 as "fifth_Horse_WinRate"
+		from race r
+		where r.race_no = #{race_No}
+
+</select>
+
+</mapper>
+
+

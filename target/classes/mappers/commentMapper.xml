@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+
+	<select id="listComments" resultType="CommentVO">
+		SELECT *
+		FROM comments
+		WHERE bid = #{bid}
+		AND bno = #{bno}
+		ORDER BY
+		cmtno desc,	cmt_regdate desc
+	</select>
+	
+	<select id="selectComment" resultType="CommentVO">
+		SELECT *
+		FROM comments
+		WHERE cmtno = #{cmtno}
+	</select>
+
+	<insert id="insertComment">
+		INSERT INTO
+		comments(cmtno,bid,bno,cmt_writer,cmt_password,cmt_content)
+		VALUES((SELECT
+		NVL(MAX(cmtno)+1,1)
+		FROM comments),#{bid},#{bno},#{cmt_writer},#{cmt_password},#{cmt_content})
+	</insert>
+
+	<update id="updateComment">
+		UPDATE comments
+		SET cmt_content = #{cmt_content}, cmt_writer = #{cmt_writer}
+		WHERE cmtno = #{cmtno}
+		AND bid = #{bid}
+		AND bno = #{bno}
+		AND cmt_password = #{cmt_password}
+	</update>
+
+	<delete id="deleteComment">
+		DELETE FROM comments
+		WHERE cmtno = #{cmtno}
+		AND cmt_password = #{cmt_password}
+	</delete>
+
+</mapper>
