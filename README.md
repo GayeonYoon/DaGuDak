@@ -1,7 +1,6 @@
 # DaGuDak [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fhit-counter&count_bg=%23858FB2&title_bg=%238D8585&icon=badoo.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
-
-웹 경마 사이트
+## [쌍용교육센터 - Project 4]  DAGUDAK (다그닥) - 온라인 경마 게임 ## 
+ 
 - 기간 : 20. 10. 18 ~ 20. 11. 05
 - 팀원 : 5명
 - 개발툴 : eclipse IDE, Oracle sqldeveloper
