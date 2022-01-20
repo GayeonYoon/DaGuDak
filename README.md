@@ -74,12 +74,12 @@
 &nbsp;&nbsp;&nbsp;
 ## ✍️ ****Summary****
 
-**기획 의도**
+*기획 의도*
   - 단순한 CRUD 기능 외에 모두가 참여할 수 있고 즐길 수 있는 요소를 추가<br>
   - 다수의 클라이언트가 직접 참여할 수 있는 프로젝트<br>
   - Spring framework, JavaScript, WebSocket 등 다양한 기술 활용 목적<br>
     
-**주요 기능**
+*주요 기능*
 <details markdown = "1">
 <summary>회원 CRUD</summary>
 
