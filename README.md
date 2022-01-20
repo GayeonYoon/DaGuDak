@@ -70,6 +70,17 @@
 &nbsp;&nbsp;&nbsp;
 
 # Summary
+
+
+&nbsp;&nbsp;&nbsp;
+## ✍️ ****Summary****
+
+- **기획 의도**
+    - 단순한 CRUD 기능 외에 모두가 참여할 수 있고 즐길 수 있는 요소를 추가
+    - 다수의 클라이언트가 직접 참여할 수 있는 프로젝트
+    - Spring framework, JavaScript, WebSocket 등 다양한 기술 활용 목적
+    
+- **주요 기능**
 <details markdown = "1">
 <summary>회원 CRUD</summary>
 
@@ -131,26 +142,68 @@
 
 ![image](pptImages/9chatting.JPG)
  
+</details><details markdown = "1">
+<summary>회원 CRUD</summary>
+
+![image](pptImages/1member.JPG)
+ 
 </details>
 
-&nbsp;&nbsp;&nbsp;
-## ✍️ ****Summary****
+<details markdown = "1">
+<summary>이니시스 결제 시스템을 통한 포인트 충전</summary>
 
-- **기획 의도**
-    - 단순한 CRUD 기능 외에 모두가 참여할 수 있고 즐길 수 있는 요소를 추가
-    - 다수의 클라이언트가 직접 참여할 수 있는 프로젝트
-    - Spring framework, JavaScript, WebSocket 등 다양한 기술 활용 목적
-    
-- **주요 기능**
-    - 회원 CRUD
-    - 게시판 CRUD (게시글, 댓글)
-    - 경주마 및 경기 CRUD
-    - Javascript로 구현한 경마 게임
-    - WebSocket을 이용한 실시간 경기 및 채팅
-    - 베팅 및 상금분배
-    - 이니시스 결제 시스템을 통한 포인트 충전
-    - 네이버 뉴스 검색 API 이용한 경마 뉴스 게시판
+![image](pptImages/2point.JPG)
+ 
+</details>
 
+<details markdown = "1">
+<summary>게시판 CRUD (게시글, 댓글)</summary>
+
+![image](pptImages/3board.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>네이버 뉴스검색API를 이용한 경마 뉴스 게시판</summary>
+
+![image](pptImages/4boardAPI.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>경주마 및 경기 CRUD</summary>
+
+![image](pptImages/5horse.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>베팅</summary>
+
+![image](pptImages/6betting.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>상금</summary>
+
+![image](pptImages/7reward.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>Javascript로 구현한 경마 게임</summary>
+
+![image](pptImages/8racing.JPG)
+ 
+</details>
+
+<details markdown = "1">
+<summary>WebSocket을 이용한 실시간 경기 및 채팅</summary>
+
+![image](pptImages/9chatting.JPG)
+ 
+</details>
 ## 🛠 사용 기술 및 라이브러리
 
 - Java(jdk 1.8), JSP, MyBatis, Oracle
