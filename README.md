@@ -1,4 +1,4 @@
-# DaGuDak  [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fhit-counter&count_bg=%23FF6B26&title_bg=%231D236D&icon=badoo.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+# DaGuDak  [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fhit-counter&count_bg=%23FF6B26&title_bg=%23181C47&icon=badoo.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 ## [쌍용교육센터 - Project 4]  DAGUDAK (다그닥) - 온라인 경마 게임 ## 
  
 - 기간 : 20. 10. 18 ~ 20. 11. 05
