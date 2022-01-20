@@ -69,9 +69,6 @@
 
 &nbsp;&nbsp;&nbsp;
 
-# Summary
-
-
 &nbsp;&nbsp;&nbsp;
 ## ✍️ ****Summary****
 
