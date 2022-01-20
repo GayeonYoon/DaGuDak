@@ -17,13 +17,6 @@
 
 &nbsp;&nbsp;&nbsp;
 
-# Technologies
- - Java, JavaScript
- - Spring Framework
- - Oracle
- - WebSocket
- - MyBatis, DOM, jQuery, Json, AJAX 등
-
 &nbsp;&nbsp;&nbsp;
 
 # Project Structure
@@ -143,6 +136,7 @@
  
 </details>
 
+<br/><br/>
 
 # 🛠 사용 기술 및 라이브러리
 
