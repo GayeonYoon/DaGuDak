@@ -25,7 +25,15 @@
 - JSP를 이용한 views
 - Mybatis를 이용한 mappers
 
-&nbsp;&nbsp;&nbsp;
+<br/><br/>
+
+# 🛠 사용 기술 및 라이브러리
+
+- Java(jdk 1.8), JSP, MyBatis, Oracle
+- Spring Framework, Eclipse
+- HTML, CSS, JavaScript, jQuery , Json, Ajax, WebSocket
+
+<br/><br/>
 
 # DB Modeling
 ![image](ERD.png)
@@ -137,9 +145,3 @@
 </details>
 
 <br/><br/>
-
-# 🛠 사용 기술 및 라이브러리
-
-- Java(jdk 1.8), JSP, MyBatis, Oracle
-- Spring Framework, Eclipse
-- HTML, CSS, JavaScript, jQuery , Json, Ajax, WebSocket
