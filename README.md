@@ -34,7 +34,7 @@
 
 <br/><br/>
 
-# DB Modeling
+# ERD
 ![image](ERD.png)
 
 &nbsp;&nbsp;&nbsp;
